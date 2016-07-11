@@ -13,7 +13,7 @@
 #define UP     72      // 위쪽방향키
 #define DOWN   80      // 아래방향키
 #define SQUARE_SIZE   12
-
+void animation(int x, int y);
 
 void eraseAll()
 {
@@ -282,101 +282,217 @@ int setSystem()
 
 
 
-void rhythmGame()
+
+void rhythmGameMain()
 {
+	void rhythmGame1(int success, int number);
+	void rhythmGame2(int success, int number, int number2, int i, int j);
+	void rhythmGame3(int success, int number, int number2, int number3, int i, int j, int i2, int j2);
+
+	//clock_t start;
 	
-	clock_t start;
-	
-	int i,j,k,l;
-	int number;
+	int i,j,k,l,i2 = 0,j2 = 0;
+	int number1, number2= 0, number3 = 0;
 	int success = 0;
 	int ubeat[3][3] = {0};
 	int temp;
+	int multiplePress;
+	int multNum;
 
 	srand((unsigned int)time(NULL));
 	
 	while(1)
 	{
 		temp = rand() % 9;
+		multiplePress = rand()% 10;
+
 		i = temp/3 ;
 		j = temp%3;
 		ubeat[i][j] = 1; //0이나 1의 값을 넣어준다
-	/*	
+		number1 = 3*i +1+j;
+
+		if(multiplePress >=6 && multiplePress <= 7)
+		{
+			multNum = 2;
+			while(1)
+			{
+				temp = rand() % 9;
+				i = temp/3 ;
+				j = temp%3;
+				number2 = 3*i +1+j;
+				if(number2!=number1)
+					break;
+			}
+		}
+		else if(multiplePress >=8 && multiplePress <= 9)
+		{
+			multNum = 3;
+			while(1)
+			{
+				temp = rand() % 9;
+				i = temp/3 ;
+				j = temp%3;
+				number2 = 3*i +1+j;
+				temp = rand() % 9;
+				i2 = temp/3 ;
+				j2 = temp%3;
+				number3 = 3*i2+1+j2;
+				if(number2!=number1 && number2!=number3 && number1!=number3)
+					break;
+					
+			}
+		}
+		else
+		{
+			multNum = 1;
+		}
+
+	//if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+	
+	
+	//Sleep(2000);
+	//start = clock();
+	
+	if(multNum == 1)
+	{
+		rhythmGame1(success, number1);
+	}
+	else if(multNum == 2)
+	{
+		rhythmGame2(success, number1, number2, i,j);
+	}
+	else if (multNum == 3)
+	{
+		rhythmGame3(success, number1, number2, number3, i,j , i2, j2);
+	}
+	else
+	{
+	}
+	
+		Gotoxy(90,30);
+		
+	
+		
+	Sleep(rand()% 700 + 50);
+	eraseAll();
+
 	for(i=0; i<3; i++)
 	{
 		for(j =0; j<3; j++)
 		{
-			ubeat[i][j] = rand() %2; //0이나 1의 값을 넣어준다
-			if(ubeat[i][j] == 1)
-			{
-				break;//만약 1이면 for문 탈출
-			}
+			ubeat[i][j] = 0; //0이나 1의 값을 넣어준다
+			
 		}
-
-		if(ubeat[i][j] == 1)
-		{
-			break; //만약 1이면 for문 탈출
-		}
-	}*/
-
-
-
-	for(k=0; k<3; k++)
-	{
-		for(l=0; l<3; l++)
-		{
-			printf("%3d", ubeat[k][l]);
-		}
-		printf("\n");
 	}
+
+	success = 0;
+
+	drawSqureSub(1,1);
+	drawSqureSub(1,15);
+	drawSqureSub(1,29);
+	drawSqureSub(30,1);
+	drawSqureSub(30, 15);
+	drawSqureSub(30, 29);
+	drawSqureSub(59,1);
+	drawSqureSub(59, 15);
+	drawSqureSub(59, 29);
+
+	number2 =0;
+	number3 =0;
+	}
+			
 	
-	
-	//Sleep(2000);
+}
+
+void rhythmGame1(int success, int number)
+{
+	clock_t start;
 	start = clock();
-	while(clock() - start <= 700 )
+
+	
+
+	while(clock() - start <= 250 )
 	{
-		number = 3*(2-i)+1+j;
 		
 		switch(number)
 		{
 		
-			case 1: if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+			case 1: animation(1,29);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
 					success = 1;
+					else
+					success = -1;
+					}
+					break;
+
+			case 2: animation(30,29);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success = 1;
+					else
+					success = -1;
+					}
 					
 					break;
-			case 2: if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+			case 3: animation(59,29);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
 					success = 1;
-					
+					else
+					success = -1;
+					}
 					break;
-			case 3: if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+			case 4: animation(1,15);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
 					success = 1;
-				
+					else
+					success = -1;
+					}
 					break;
-			case 4: if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+			case 5: animation(30,15);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
 					success = 1;
-					
+					else
+					success = -1;
+					}
 					break;
-			case 5: if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+			case 6: animation(59,15);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
 					success = 1;
-					
+					else
+					success = -1;
+					}
 					break;
-			case 6: if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+			case 7: animation(1,1);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
 					success = 1;
-				
+					else
+					success = -1;
+					}
 					break;
-			case 7: if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+			case 8: animation(30,1);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
 					success = 1;
-					
+					else
+					success = -1;
+					}
 					break;
-			case 8: if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+			case 9: animation(59,1);
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
 					success = 1;
-					
-					break;
-			case 9: if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
-					success = 1;
-					
+					else
+					success = -1;
+					}
 					break;
 		}
+
 		if(success == 1)
 		{
 			break;
@@ -396,64 +512,1197 @@ void rhythmGame()
 					
 
 	}
-	if(success == 1)
-		printf("success");
-	else
-		printf("fail");
-		
-	Sleep(rand()% 1000 + 300);
-	eraseAll();
 
-	for(i=0; i<3; i++)
+	while(clock() - start <= 550 )
 	{
-		for(j =0; j<3; j++)
+		if(success == 1)
 		{
-			ubeat[i][j] = 0; //0이나 1의 값을 넣어준다
-			
+			break;
+		}
+
+				switch(number)
+		{
+		
+			case 1: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+
+			case 2: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					
+					break;
+			case 3:
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+			case 4: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+			case 5: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+			case 6: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+			case 7:
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+			case 8:
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
+			case 9: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+					success = 2;
+					else
+					success = -1;
+					}
+					break;
 		}
 	}
 
-	success = 0;
+	if(success == 1)
+		printf("success");
+	else if(success == 2)
+		printf("success*2!!");
+	else
+		printf("fail");
+}
+
+void rhythmGame2(int success, int number, int number2, int i, int j)
+{
+	void animation2(int a, int b, int x, int y);
+	clock_t start;
+	start = clock();
+	int success1 = 0, success2 =0;
+
+	while(clock() - start <= 1550 )
+	{
+		
+		switch(number)
+		{
+		
+			case 1: animation2(1, 29, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+
+			case 2: animation2(30,29, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success1 = 1;
+					
+				
+					
+					
+					break;
+			case 3: animation2(59,29, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 4: animation2(1,15, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 5: animation2(30,15, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 6: animation2(59,15, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 7: animation2(1,1, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 8: animation2(30,1, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 9: animation2(59,1, 1+29*j,29-14*i);
+					
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+		}
+
+		switch(number2)
+		{
+		
+			case 1: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+
+			case 2:
+					
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					
+					break;
+			case 3: 
+					if (kbhit()!=0){
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+					success2 = 1;
+					
+					
+					}
+					break;
+			case 4:
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 5:
+					
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 6:
+					
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 7: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 8:
+					
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 9:
+					
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+		}
 
 	}
-			
-	/*
-	while (clock() - start <= 500)
+
+	while(clock() - start <= 3050 )
 	{
-					for (int i = 1; i <= 32; i++)
-					{
-						Gotoxy(i, 60);
-						printf("①");
-						Sleep(30);
-						Gotoxy(i, 60);
-						printf(" ");
+		
+		if(success1 == 1)
+		{
+					switch(number)
+				{
+		
+				case 1: 
 						
-					}
-	}*/
+						if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+
+				case 2: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+						success1 = 2;
+					
+					
+						
+					
+						break;
+				case 3:
+						
+						if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 4: 
+					
+						if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 5: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 6: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 7:
+						
+						if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 8:
+						
+						if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 9: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				}
+			break;
+		}
+
+		if(success2 == 1)
+		{
+					switch(number2)
+				{
+		
+				case 1: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+
+				case 2: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+						success2 = 2;
+					
+					
+						
+					
+						break;
+				case 3:
+						
+						if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 4: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 5: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 6: 
+					
+						if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 7:
+						
+						if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+						success2 = 2;
+					
+				
+						
+						break;
+				case 8:
+						
+						if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 9: 
+						if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				}
+			break;
+		}
+		
+	}
+
+	if(success1 == 1)
+		printf("success1");
+	else if(success1 == 2)
+		printf("success1*2!!");
+	else
+		printf("fail1");
+
+	if(success2 == 1)
+		printf("success2");
+	else if(success1 == 2)
+		printf("success2*2!!");
+	else
+		printf("fail2");
+
+}
+
+void rhythmGame3(int success, int number, int number2, int number3, int i, int j, int i2, int j2)
+{
+	void animation3(int a, int b, int x, int y, int x2, int y2);
+	clock_t start;
+	start = clock();
+	int success1 = 0, success2 =0, success3 =0;;
+
+	while(clock() - start <= 1550 )
+	{
+	
+		
+		switch(number)
+		{
+		
+			case 1: animation3(1, 29, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+
+			case 2: animation3(30,29, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					
+					break;
+			case 3: animation3(59,29, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 4: animation3(1,15, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 5: animation3(30,15, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+					success1 = 1;
+					
+				
+					
+					break;
+			case 6: animation3(59,15, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 7: animation3(1,1, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 8: animation3(30,1, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+			case 9: animation3(59,1, 1+29*j,29-14*i, 1+29*j2,29-14*i2);
+					
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+					success1 = 1;
+					
+					
+					
+					break;
+		}
+
+		switch(number2)
+		{
+		
+			case 1: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+
+			case 2:
+					
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					
+					break;
+			case 3: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+					success2 = 1;
+					
+				
+					
+					break;
+			case 4:
+					
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 5:
+					
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 6:
+					
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 7: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 8:
+				
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+			case 9:
+					
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+					success2 = 1;
+					
+					
+					
+					break;
+		}
+
+		switch(number3)
+		{
+		
+			case 1: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+
+			case 2:
+					
+					if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					
+					break;
+			case 3: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+			case 4:
+					
+					if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+			case 5:
+					
+					if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+			case 6:
+					
+					if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+			case 7: 
+					
+					if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+			case 8:
+					
+					if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+					success3 = 1;
+					
+					
+					
+					break;
+			case 9:
+					
+					if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+					success3 = 1;
+					break;
+		}
+		
+	}
+	
+	while(clock() - start <= 3050 )
+	{
+		
+		if(success1 == 1)
+		{
+					switch(number)
+				{
+		
+				case 1: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+
+				case 2: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+						success1 = 2;
+					
+					
+						
+					
+						break;
+				case 3:
+						
+						if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+						success1 = 2;
+					
+				
+						
+						break;
+				case 4: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 5: 
+					
+						if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 6: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 7:
+						
+						if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 8:
+						
+						if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				case 9: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+						success1 = 2;
+					
+					
+						
+						break;
+				}
+			break;
+		}
+
+		if(success2 == 1)
+		{
+					switch(number2)
+				{
+		
+				case 1: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+
+				case 2: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+						success2 = 2;
+					
+					
+						
+					
+						break;
+				case 3:
+						
+						if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 4: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 5: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 6: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 7:
+						
+						if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 8:
+						
+						if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+						success2 = 2;
+					
+					
+						
+						break;
+				case 9: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+						success2 = 2;
+						
+						break;
+				}
+			break;
+		}
+
+		if(success3 == 1)
+		{
+					switch(number3)
+			{
+		
+				case 1: 
+					
+						if(GetAsyncKeyState(VK_NUMPAD1) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+
+				case 2:
+						
+						if(GetAsyncKeyState(VK_NUMPAD2) & 0x8000)
+						success3 = 1;
+					
+					
+						
+					
+						break;
+				case 3: 
+						
+						if(GetAsyncKeyState(VK_NUMPAD3) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				case 4:
+						
+						if(GetAsyncKeyState(VK_NUMPAD4) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				case 5:
+					
+						if(GetAsyncKeyState(VK_NUMPAD5) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				case 6:
+					
+						if(GetAsyncKeyState(VK_NUMPAD6) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				case 7: 
+					
+						if(GetAsyncKeyState(VK_NUMPAD7) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				case 8:
+					
+						if(GetAsyncKeyState(VK_NUMPAD8) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				case 9:
+					
+						if(GetAsyncKeyState(VK_NUMPAD9) & 0x8000)
+						success3 = 1;
+					
+					
+						
+						break;
+				}
+			break;
+		}
+
+		
+	}
+
+	if(success1 == 1)
+		printf("success1");
+	else if(success1 == 2)
+		printf("success1*2!!");
+	else
+		printf("fail1");
+
+	if(success2 == 1)
+		printf("success2");
+	else if(success1 == 2)
+		printf("success2*2!!");
+	else
+		printf("fail2");
+
+	if(success2 == 1)
+		printf("success3");
+	else if(success1 == 2)
+		printf("success3*2!!");
+	else
+		printf("fail3");
+
+	
 
 }
 
 void animation(int x, int y)
 {
-	int i,j;
+	int i,j,k;
 
-	for(int i=y;i<SQUARE_SIZE+y;i++)
+	for(k=0;k<6;k++)
 	{
-		textcolor(204);
-		Gotoxy(x,i);
-	    printf("%c",'k');
-	}
-
-		for(int j=x;j<SQUARE_SIZE*2+x;j++)
+		for(int i=y+ k;i<SQUARE_SIZE + y - k;i++)
 		{
 			textcolor(204);
-			Gotoxy(j,y);
-			printf("%c",'k');
+			Gotoxy(x + 2* k,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(x+ 2* k + 1,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x - 2 * k - 1,i);
+		    printf("%c",'k');
+
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x - 2*k - 2,i);
+		    printf("%c",'k');
 		}
 	
+		for(int j=x + 2*k;j<SQUARE_SIZE*2+x - 2*k;j++)
+		{
+			textcolor(204);
+			Gotoxy(j,y + k);
+			printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(j,SQUARE_SIZE + y - 1 - k);
+			printf("%c",'k');
+		}
+		Sleep(70);
+	}
+		textcolor(7);
 
 
 }
+
+void animation2(int a, int b, int x, int y)
+{
+	int i,j,k;
+
+	for(k=0;k<6;k++)
+	{
+		for(int i=b+ k;i<SQUARE_SIZE + b - k;i++)
+		{
+			textcolor(204);
+			Gotoxy(a + 2* k,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(a+ 2* k + 1,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + a - 2 * k - 1,i);
+		    printf("%c",'k');
+
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + a - 2*k - 2,i);
+		    printf("%c",'k');
+		}
+	
+		for(int j=a + 2*k;j<SQUARE_SIZE*2+a - 2*k;j++)
+		{
+			textcolor(204);
+			Gotoxy(j,b + k);
+			printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(j,SQUARE_SIZE + b - 1 - k);
+			printf("%c",'k');
+		}
+
+		for(int i=y+ k;i<SQUARE_SIZE + y - k;i++)
+		{
+			textcolor(204);
+			Gotoxy(x + 2* k,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(x+ 2* k + 1,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x - 2 * k - 1,i);
+		    printf("%c",'k');
+
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x - 2*k - 2,i);
+		    printf("%c",'k');
+		}
+	
+		for(int j=x + 2*k;j<SQUARE_SIZE*2+x - 2*k;j++)
+		{
+			textcolor(204);
+			Gotoxy(j,y + k);
+			printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(j,SQUARE_SIZE + y - 1 - k);
+			printf("%c",'k');
+		}
+		Sleep(120);
+	}
+		textcolor(7);
+
+}
+
+void animation3(int a, int b, int x, int y, int x2, int y2)
+{
+	int i,j,k;
+
+	for(k=0;k<6;k++)
+	{
+		for(int i=b+ k;i<SQUARE_SIZE + b - k;i++)
+		{
+			textcolor(204);
+			Gotoxy(a + 2* k,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(a+ 2* k + 1,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + a - 2 * k - 1,i);
+		    printf("%c",'k');
+
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + a - 2*k - 2,i);
+		    printf("%c",'k');
+		}
+	
+		for(int j=a + 2*k;j<SQUARE_SIZE*2+a - 2*k;j++)
+		{
+			textcolor(204);
+			Gotoxy(j,b + k);
+			printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(j,SQUARE_SIZE + b - 1 - k);
+			printf("%c",'k');
+		}
+
+		for(int i=y+ k;i<SQUARE_SIZE + y - k;i++)
+		{
+			textcolor(204);
+			Gotoxy(x + 2* k,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(x+ 2* k + 1,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x - 2 * k - 1,i);
+		    printf("%c",'k');
+
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x - 2*k - 2,i);
+		    printf("%c",'k');
+		}
+	
+		for(int j=x + 2*k;j<SQUARE_SIZE*2+x - 2*k;j++)
+		{
+			textcolor(204);
+			Gotoxy(j,y + k);
+			printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(j,SQUARE_SIZE + y - 1 - k);
+			printf("%c",'k');
+		}
+
+		for(int i=y2+ k;i<SQUARE_SIZE + y2 - k;i++)
+		{
+			textcolor(204);
+			Gotoxy(x2 + 2* k,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(x2+ 2* k + 1,i);
+		    printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x2 - 2 * k - 1,i);
+		    printf("%c",'k');
+
+			textcolor(204);
+			Gotoxy(SQUARE_SIZE*2 + x2 - 2*k - 2,i);
+		    printf("%c",'k');
+		}
+	
+		for(int j=x2 + 2*k;j<SQUARE_SIZE*2+x2 - 2*k;j++)
+		{
+			textcolor(204);
+			Gotoxy(j,y2 + k);
+			printf("%c",'k');
+		
+			textcolor(204);
+			Gotoxy(j,SQUARE_SIZE + y2 - 1 - k);
+			printf("%c",'k');
+		}
+		Sleep(150);
+	}
+		textcolor(7);
+
+}
+
+
 
 int main(int argc, char* argv[])
 {
@@ -468,10 +1717,18 @@ int main(int argc, char* argv[])
 	drawSqureSub(59,1);
 	drawSqureSub(59, 15);
 	drawSqureSub(59, 29);
-
-	
-
-	//rhythmGame();
+	/*
+	animation(1,1);
+	animation(1,15);
+	animation(1,29);
+	animation(30,1);
+	animation(30,15);
+	animation(30,29);
+	animation(59,1);
+	animation(59,15);
+	animation(59,29);
+	*/
+	rhythmGameMain();
 	
 	return 0;
 }
