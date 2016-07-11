@@ -17,6 +17,4 @@ void drawSqure(int x,int y);
 void eraseAll();
 void animation(int x, int y);
 
-bool isSuccess(int number);
-bool isSuccesses(int numbers[], int howmany);
 void rhythmGame();

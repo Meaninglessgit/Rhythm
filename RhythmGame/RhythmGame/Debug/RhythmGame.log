@@ -1,18 +1,12 @@
-﻿빌드 시작: 2016-07-11 오후 10:09:18
+﻿빌드 시작: 2016-07-12 오전 3:30:28
      1>2 노드의 "D:\git_workspace\Rhythm\RhythmGame\RhythmGame\RhythmGame.vcxproj" 프로젝트(Build 대상)입니다.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt rhythmGame.cpp
-         rhythmGame.cpp
-     1>d:\git_workspace\rhythm\rhythmgame\rhythmgame\rhythmgame.cpp(75): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
-     1>d:\git_workspace\rhythm\rhythmgame\rhythmgame\rhythmgame.cpp(75): warning C4101: 'l' :참조되지 않은 지역 변수입니다.
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.lib" /MACHINE:X86 Debug\animation.obj
-         Debug\menu.obj
-         Debug\main.obj
-         Debug\rhythmGame.obj
-         RhythmGame.vcxproj -> D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.exe
-     1>"D:\git_workspace\Rhythm\RhythmGame\RhythmGame\RhythmGame.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.lib" /MACHINE:X86 Debug\newfile.obj
+         "Debug\메뉴.obj"
+     1>메뉴.obj : error LNK2005: _main이(가) newfile.obj에 이미 정의되어 있습니다.
+     1>D:\git_workspace\Rhythm\RhythmGame\Debug\RhythmGame.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.
+     1>"D:\git_workspace\Rhythm\RhythmGame\RhythmGame\RhythmGame.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
 
-빌드했습니다.
+빌드하지 못했습니다.
 
-경과 시간: 00:00:00.65
+경과 시간: 00:00:00.11

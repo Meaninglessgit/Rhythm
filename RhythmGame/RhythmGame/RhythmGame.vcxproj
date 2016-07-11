@@ -76,10 +76,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="animation.cpp" />
-    <ClCompile Include="menu.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="rhythmGame.cpp" />
+    <ClCompile Include="newfile.cpp" />
+    <ClCompile Include="menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />

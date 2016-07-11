@@ -15,16 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="newfile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="menu.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="rhythmGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="animation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
