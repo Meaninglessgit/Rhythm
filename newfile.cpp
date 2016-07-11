@@ -13,10 +13,8 @@
 #define UP     72      // 위쪽방향키
 #define DOWN   80      // 아래방향키
 
-struct student{
-	
-	void vsasg();
-};
+#define SIZE 900
+#define SQUARE_SIZE 300
 
 void eraseAll()
 {
@@ -27,211 +25,6 @@ void eraseAll()
 
 }
 
-
-void box()
-{
-	void Gotoxy(int x, int y);
-	int i,j;
-
-	for (i = 32; i <= 46; i++)
-	{
-		Gotoxy(i, 20);
-		printf("│");
-
-	}
-	Gotoxy(47, 20);
-	printf("└");
-
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┘");
-	printf("         ");
-	printf("└");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┘");
-	printf("         ");
-	printf("└");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┘");//bottom ─
-
-	Gotoxy(31, 20);
-	printf("┌");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┐");
-	printf("         ");
-	printf("┌");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┐");
-	printf("         ");
-	printf("┌");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┐");//top─
-
-	for (i = 32; i <= 46; i++)
-	{
-		Gotoxy(i, 42);
-		printf("│");
-
-	}
-
-	for (i = 32; i <= 46; i++)
-	{
-		Gotoxy(i, 53);
-		printf("│");
-
-	}
-
-	for (i = 32; i <= 46; i++)
-	{
-		Gotoxy(i, 75);
-		printf("│");
-
-	}
-
-	for (i = 32; i <= 46; i++)
-	{
-		Gotoxy(i, 86);
-		printf("│");
-
-	}
-
-
-	for (i = 32; i <= 46; i++)
-	{
-		Gotoxy(i, 108);
-		printf("│");
-
-	}//bottom deck!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-	for (i = 2; i <= 16; i++)
-	{
-		Gotoxy(i, 20);
-		printf("│");
-
-	}
-	Gotoxy(17, 20);
-	printf("└");
-
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┘");
-	printf("         ");
-	printf("└");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┘");
-	printf("         ");
-	printf("└");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┘");//bottom ─
-
-	Gotoxy(1, 20);
-	printf("┌");
-	for (int j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┐");
-	printf("         ");
-	printf("┌");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┐");
-	printf("         ");
-	printf("┌");
-	for (j = 1; j <= 10; j++)
-	{
-
-		printf("─");
-
-	}
-	printf("┐");//top─
-
-	for (i = 2; i <= 16; i++)
-	{
-		Gotoxy(i, 42);
-		printf("│");
-
-	}
-
-	for (i = 2; i <= 16; i++)
-	{
-		Gotoxy(i, 53);
-		printf("│");
-
-	}
-
-	for (i = 2; i <= 16; i++)
-	{
-		Gotoxy(i, 75);
-		printf("│");
-
-	}
-
-	for (i = 2; i <= 16; i++)
-	{
-		Gotoxy(i, 86);
-		printf("│");
-
-	}
-
-
-	for (i = 2; i <= 16; i++)
-	{
-		Gotoxy(i, 108);
-		printf("│");
-
-	}
-}
 
 
 void Gotoxy(int x, int y)
@@ -277,11 +70,44 @@ void textcolor(int color_number)
 
 }*/
 
+int drawSqure(x,y)
+{
+	Gotoxy(x,y);
+    int i,j;
+    unsigned char a = 0xa6;
+
+    /************* 맨 윗단 그리기*********************/
+    printf("%c%c",a,0xa3);
+    for(i=0;i<x-2;i++)printf("%c%c",a,0xa1);
+    printf("%c%c\n",a,0xa4);
+
+    /************* 중간 그리가************************/
+    for(j=0;j<y-2;j++){
+        printf("%c%c",a,0xa2);
+        for(i=0;i<x-2;i++)printf("  ");
+        printf("%c%c",a,0xa2);
+        printf("\n");
+    }
+    /************* 맨 밑단 그리기*********************/
+    printf("%c%c",a,0xa6);
+    for(i=0;i<x-2;i++)printf("%c%c",a,0xa1);
+    printf("%c%c\n",a,0xa5);
+
+	}
+}
+
+
+int setSystem()
+{
+	system("title RhythmGame");
+	//system("color f0");
+	system("mode con:cols=129 lines=47");
+	return 0;
+}
+
 int main(int argc, char* argv[])
 {
-	system("color f0");
-	system("mode con:cols=129 lines=47");
+	setSystem();
 
-	box();
-	
 }
+
